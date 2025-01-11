@@ -6,26 +6,28 @@ const SPEED = 80.0
 @onready var character_body_3d: CharacterBody3D = $"."
 
 func manageMvmt() -> void:
-	var mvmtPressed = false
+	var wsPressed = false
+	var adPressed = false
 	if Input.is_action_pressed("w"):
 		velocity.z = -SPEED
-		rotate_y(PI - character_body_3d.rotation.y)
-		mvmtPressed = true
+		look_at(character_body_3d.position+Vector3(0, 0, 1),Vector3(0, 1, 0))
+		wsPressed = true
 	if Input.is_action_pressed("d"):
 		velocity.x = SPEED
-		rotate_y(PI/2 - character_body_3d.rotation.y)
-		mvmtPressed = true
+		look_at(character_body_3d.position+Vector3(-1, 0, 0),Vector3(0, 1, 0))
+		adPressed = true
 	if Input.is_action_pressed("s"):
 		velocity.z = SPEED
-		rotate_y(-character_body_3d.rotation.y)
-		mvmtPressed = true
+		look_at(character_body_3d.position+Vector3(0, 0, -1),Vector3(0, 1, 0))
+		wsPressed = true
 	if Input.is_action_pressed("a"):
 		velocity.x = -SPEED
-		rotate_y(3*PI/2 - character_body_3d.rotation.y)
-		mvmtPressed = true
+		look_at(character_body_3d.position+Vector3(1, 0, 0),Vector3(0, 1, 0))
+		adPressed = true
 		
-	if not mvmtPressed:
+	if not adPressed:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if not wsPressed:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 
