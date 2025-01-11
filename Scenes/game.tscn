@@ -1,0 +1,153 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctqgfeyekqkhj"]
+
+[ext_resource type="PackedScene" uid="uid://cs5ar753y1e1t" path="res://Scenes/player.tscn" id="1_05j3i"]
+[ext_resource type="Script" path="res://Scripts/directional_light_3d.gd" id="1_orqw0"]
+
+[sub_resource type="Animation" id="Animation_aciau"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e2x0g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.343441, 0, 0.178259, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vo4o"]
+_data = {
+"RESET": SubResource("Animation_e2x0g"),
+"new_animation": SubResource("Animation_aciau")
+}
+
+[sub_resource type="Animation" id="Animation_aeb0x"]
+resource_name = "a"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 16.0]
+}
+
+[sub_resource type="Animation" id="Animation_2dlhs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtjba"]
+_data = {
+"RESET": SubResource("Animation_2dlhs"),
+"a": SubResource("Animation_aeb0x")
+}
+
+[sub_resource type="Animation" id="Animation_8c2xu"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../Player:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-6.28319, -6.28319, -6.28319), Vector3(6.28319, 6.28319, 6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_jgih8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../Player:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g42yg"]
+_data = {
+"RESET": SubResource("Animation_jgih8"),
+"spin": SubResource("Animation_8c2xu")
+}
+
+[node name="Game" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0329506, 0.080668, 39.4231)
+fov = 105.1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.1824, -24.63)
+light_color = Color(0.343441, 0, 0.178259, 1)
+light_energy = 0.0
+shadow_enabled = true
+script = ExtResource("1_orqw0")
+
+[node name="rgb" type="AnimationPlayer" parent="Camera3D/DirectionalLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_2vo4o")
+}
+autoplay = "new_animation"
+
+[node name="seizure" type="AnimationPlayer" parent="Camera3D/DirectionalLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gtjba")
+}
+autoplay = "a"
+
+[node name="Player" parent="." instance=ExtResource("1_05j3i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.529075, -5.96046e-08, 0.790455)
+
+[node name="spain without the a" type="AnimationPlayer" parent="Player"]
+root_node = NodePath("../../Camera3D/DirectionalLight3D/seizure")
+libraries = {
+"": SubResource("AnimationLibrary_g42yg")
+}
+autoplay = "spin"
