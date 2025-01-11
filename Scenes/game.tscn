@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://usgks32l4et8"]
 
 [ext_resource type="PackedScene" uid="uid://bi2vlqriiep41" path="res://Scenes/characters/skeleton.tscn" id="1_5q127"]
-[ext_resource type="Script" path="res://Scenes/characters/skeleton.gd" id="2_b3ux2"]
+[ext_resource type="Script" path="res://Scripts/skeleton.gd" id="2_b3ux2"]
 [ext_resource type="MeshLibrary" uid="uid://d27il77cvuntn" path="res://Assets/cubelib.tres" id="3_w65hv"]
 
 [node name="Game" type="Node3D"]
