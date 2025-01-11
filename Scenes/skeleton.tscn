@@ -9,7 +9,7 @@ height = 71.9163
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggtfs"]
 metallic = 1.0
 
-[node name="Player" type="Node3D"]
+[node name="Skeleton" type="Node3D"]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 
