@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbacynxhp7kpu"]
+
+[ext_resource type="Texture2D" uid="uid://bfqa57xmck6st" path="res://Assets/Boxman.png" id="1_ek4wa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ajco2"]
+radius = 182.26
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 2147483648
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -454)
+scale = Vector2(0.465, 2.135)
+texture = ExtResource("1_ek4wa")
+
+[node name="Collision Box" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 208)
+shape = SubResource("CircleShape2D_ajco2")
