@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbacynxhp7kpu"]
+
+[ext_resource type="Texture2D" uid="uid://bfqa57xmck6st" path="res://Assets/Boxman.png" id="1_ek4wa"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_qepax"]
+[ext_resource type="Resource" uid="uid://byqpx40d8fg5j" path="res://Resources/player_stats.tres" id="2_bqrbi"]
+[ext_resource type="Script" path="res://Scenes/hurt_box.gd" id="4_43ahk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ajco2"]
+radius = 182.26
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37tim"]
+size = Vector2(328, 1322)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2147483648
+script = ExtResource("1_qepax")
+player_stats = ExtResource("2_bqrbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -454)
+scale = Vector2(0.465, 2.135)
+texture = ExtResource("1_ek4wa")
+
+[node name="Collision Box" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 208)
+shape = SubResource("CircleShape2D_ajco2")
+
+[node name="HurtBox" type="Area2D" parent="." groups=["Player"]]
+script = ExtResource("4_43ahk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -295)
+shape = SubResource("RectangleShape2D_37tim")
+
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
+[connection signal="damage_taken" from="HurtBox" to="." method="_on_hurt_box_damage_taken"]
