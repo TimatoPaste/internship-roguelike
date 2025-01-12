@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtckc6jv8y8e4"]
+[gd_scene load_steps=5 format=3 uid="uid://dtckc6jv8y8e4"]
 
-[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_txs3k"]
 [ext_resource type="Texture2D" uid="uid://cujagl4stb88y" path="res://icon.svg" id="2_k5mdc"]
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="3_v4k13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30tjq"]
+radius = 794.75
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbqel"]
+radius = 860.9
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_txs3k")
+[node name="Projectile" type="CharacterBody2D"]
+script = ExtResource("3_v4k13")
 
-[node name="projectilehitbox" type="Area2D" parent="."]
+[node name="Collision Shape (Physics)" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_30tjq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="projectilehitbox"]
+[node name="Projectile Hitbox" type="Area2D" parent="."]
+
+[node name="Hitbox Shape (Damage)" type="CollisionShape2D" parent="Projectile Hitbox"]
 shape = SubResource("CircleShape2D_wbqel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.125, 0.140625)
+scale = Vector2(10, 10)
 texture = ExtResource("2_k5mdc")
 
-[connection signal="area_entered" from="projectilehitbox" to="." method="_on_projectilehitbox_area_entered"]
+[connection signal="area_shape_entered" from="Projectile Hitbox" to="." method="_on_projectile_hitbox_area_shape_entered"]

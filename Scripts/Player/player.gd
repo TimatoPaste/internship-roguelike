@@ -7,7 +7,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func wsadMvmt() -> void:
-	var deltaVector = Vector2(0,0)
+	var directionVector = Vector2(0,0)
 	
 	#summing direction vectors
 	var xDirection := Input.get_axis("Move Left", "Move Right")
@@ -15,18 +15,18 @@ func wsadMvmt() -> void:
 	
 	var holdKey = false
 	if xDirection:
-		deltaVector.x = xDirection
+		directionVector.x = xDirection
 		holdKey = true
 	if yDirection:
-		deltaVector.y = yDirection
+		directionVector.y = yDirection
 		holdKey = true
 	if holdKey:
-		velocity = SPEED * deltaVector.normalized()
+		velocity = SPEED * directionVector.normalized()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	#doing actual movement
-	player.global_position += deltaVector.normalized() * SPEED;
+	player.global_position += velocity;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	wsadMvmt()
@@ -35,3 +35,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_hurt_box_damage_taken(damage):
 	player_stats.take_damage(damage)
+	print("took " + str(damage) + " damage")

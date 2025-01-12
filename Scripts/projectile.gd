@@ -1,12 +1,23 @@
-class_name projectile
-extends Node2D
+extends CharacterBody2D
+@onready var projectile: CharacterBody2D = $"."
+@export var stats : projectile_stats
 
-@export var damage:= 1
-signal player_damage(damage)
+func _ready() -> void:
+	#doesn't set texure if resource texture is empty
+	if not $Sprite2D.texture:
+		$Sprite2D.texture = stats.texture
 
+func _physics_process(delta: float) -> void:
+	velocity = stats.direction.normalized() * stats.speed
+	projectile.global_position += velocity
+	move_and_slide()
 
-
-
-func _on_projectilehitbox_area_entered(area):
+signal player_damage
+#need to do area_shape_entered, not just area_entered
+func _on_projectile_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	print("You got hit")
 	if area.is_in_group("Player"):
-		player_damage.emit(damage)
+		#isn't actually doing anything right now because we haven't finished bus (also it's not linked)
+		player_damage.emit(stats.damage)
+		
+	queue_free()
