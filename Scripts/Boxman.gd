@@ -24,6 +24,7 @@ func wsadMvmt() -> void:
 		velocity = SPEED * deltaVector.normalized()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, SPEED)
 	#doing actual movement
 	boxman.global_position += deltaVector.normalized() * SPEED;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
