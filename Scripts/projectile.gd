@@ -12,12 +12,12 @@ func _physics_process(delta: float) -> void:
 	projectile.global_position += velocity
 	move_and_slide()
 
-signal player_damage
+
 #need to do area_shape_entered, not just area_entered
 func _on_projectile_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	print("You got hit")
 	if area.is_in_group("Player"):
 		#isn't actually doing anything right now because we haven't finished bus (also it's not linked)
-		player_damage.emit(stats.damage)
+		GlobalSignals.player_damaged.emit(stats.damage)
 		
 	queue_free()
