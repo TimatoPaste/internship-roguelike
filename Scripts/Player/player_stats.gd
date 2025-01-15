@@ -9,4 +9,4 @@ func take_damage(damage:int) -> void:
 	current_health -= damage
 
 func heal(heal:int) -> void:
-	current_health =+ heal
+	current_health += heal
