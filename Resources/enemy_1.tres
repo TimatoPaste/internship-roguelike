@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="enemy_stats" load_steps=3 format=3 uid="uid://bq14aks2ynip3"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/enemy_stats.gd" id="1_l30oy"]
+[ext_resource type="Texture2D" uid="uid://caww17nwtjqj" path="res://Assets/toad.jpg" id="2_21quw"]
+
+[resource]
+script = ExtResource("1_l30oy")
+texture = ExtResource("2_21quw")
+xScale = 0.0
+yScale = 0.0
+max_health = 0
+current_health = 0
+damage = 0

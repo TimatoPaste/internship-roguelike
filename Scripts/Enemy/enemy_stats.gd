@@ -16,3 +16,10 @@ func take_damage(damage:int) -> void:
 
 func heal(heal:int) -> void:
 	current_health += heal
+
+func create_instance() -> Resource:
+	var instance: enemy_stats = self.duplicate()
+	instance.max_health = max_health
+	instance.current_health = current_health
+	instance.damage = damage
+	return instance
