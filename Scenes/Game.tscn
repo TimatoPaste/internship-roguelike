@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://djqrp7sjomyip"]
+[gd_scene load_steps=8 format=3 uid="uid://djqrp7sjomyip"]
 
 [ext_resource type="PackedScene" uid="uid://bbacynxhp7kpu" path="res://Scenes/player.tscn" id="1_ftfdj"]
 [ext_resource type="PackedScene" uid="uid://dtckc6jv8y8e4" path="res://Scenes/projectile.tscn" id="3_622ip"]
 [ext_resource type="PackedScene" uid="uid://dsgucmk7teiwb" path="res://Scenes/test_stage.tscn" id="3_st4n6"]
 [ext_resource type="Script" path="res://Scripts/projectile_stats.gd" id="4_mdhwh"]
 [ext_resource type="Texture2D" uid="uid://cujagl4stb88y" path="res://icon.svg" id="5_7lsss"]
+[ext_resource type="Script" path="res://Scripts/progress_bar.gd" id="6_dmkgr"]
 
 [sub_resource type="Resource" id="Resource_j2n4a"]
 script = ExtResource("4_mdhwh")
@@ -32,7 +33,7 @@ limit_right = 31001
 limit_bottom = 16462
 limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 40.0
+position_smoothing_speed = 30.0
 editor_draw_limits = true
 
 [node name="Stage" parent="." instance=ExtResource("3_st4n6")]
@@ -44,3 +45,19 @@ metadata/_edit_lock_ = true
 [node name="Projectile" parent="." instance=ExtResource("3_622ip")]
 position = Vector2(-5992, -1336)
 stats = SubResource("Resource_j2n4a")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -83.0
+offset_right = 297.0
+offset_bottom = -25.0
+grow_vertical = 0
+max_value = 10.0
+show_percentage = false
+script = ExtResource("6_dmkgr")

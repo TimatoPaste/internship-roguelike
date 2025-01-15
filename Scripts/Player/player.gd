@@ -1,10 +1,13 @@
 extends CharacterBody2D
+
 @onready var player: Node2D = $"."
 @export var player_stats: Resource
 var SPEED = 130;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalSignals.connect("player_damaged",_on_player_damaged)
+	
 
 func wsadMvmt() -> void:
 	var directionVector = Vector2(0,0)

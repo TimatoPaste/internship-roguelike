@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbacynxhp7kpu"]
+[gd_scene load_steps=6 format=3 uid="uid://bbacynxhp7kpu"]
 
 [ext_resource type="Texture2D" uid="uid://bfqa57xmck6st" path="res://Assets/Boxman.png" id="1_ek4wa"]
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_qepax"]
 [ext_resource type="Resource" uid="uid://byqpx40d8fg5j" path="res://Resources/player_stats.tres" id="2_bqrbi"]
-[ext_resource type="Script" path="res://Scripts/Player/player_hurt_box.gd" id="4_43ahk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ajco2"]
 radius = 182.26
@@ -26,7 +25,6 @@ position = Vector2(-3, 208)
 shape = SubResource("CircleShape2D_ajco2")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Player"]]
-script = ExtResource("4_43ahk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -191.5)
