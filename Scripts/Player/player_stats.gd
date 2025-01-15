@@ -7,6 +7,7 @@ func take_damage(damage:int) -> void:
 	if damage<0:
 		return
 	current_health -= damage
+	print("health after damage: " + str(current_health))
 
 func heal(heal:int) -> void:
 	current_health += heal
